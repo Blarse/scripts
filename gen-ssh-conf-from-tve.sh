@@ -37,7 +37,7 @@ for node in $(get_nodes); do
             while IFS=':' read -r vmid vmname; do
                 (
                     [ -z "$vmid" -o -z "$vmname" ] && exit
-                    vmip=$(get_ip "$node" "$vmid")
+                    vmip=$(get_ip "$node" "$vmid" | head -n 1)
                     [ -z "$vmip" ] && exit
                     cat >> $TVE_SSH_CONFIG <<-EOF
 Host tve-${vmname// /_}
